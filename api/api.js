@@ -6,7 +6,7 @@ const newsletterRouter = require('./newsletter/newsletter')
 
 apiRouter.use('/imgs', usersRouter);
 
-apiRouter.use('/newsletter');
+apiRouter.use('/newsletter', newsletterRouter);
 
 
 module.exports = apiRouter;
