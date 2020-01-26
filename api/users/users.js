@@ -29,11 +29,33 @@ usersRouter.post('/', (req, res, next) => {
         if (err) {
           next(err);
         } else {
-          res.status(201).send({user: insertedUser[0]})
+          res.status(201).send({user: insertedUser[0]});
         }
       });
     }
   });
+});
+
+usersRouter.param('userId', (req, res, next, userId) => {
+  const sql = `SELECT * FROM Users WHERE id="${userId}" LIMIT 1`;
+  db.query(sql, function(err, result) {
+    if (err) {
+      next(err);
+    } else {
+      if (result.length > 0) {
+        req.userId = userId;
+        req.user = result[0];
+        delete req.user['password'];
+        next();
+      } else {
+        res.status(404).send();
+      }
+    }
+  });
+});
+
+usersRouter.get('/:userId', (req, res, next) => {
+  res.status(200).send({user: req.user});
 });
 
 module.exports = usersRouter;
