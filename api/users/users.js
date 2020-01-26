@@ -4,6 +4,7 @@ const usersRouter = express.Router();
 const db = require('../../db/database');
 const uuidv1 = require('uuid/v1'); // Timebase
 
+// GET /api/users
 usersRouter.get('/', (req, res, next) => {
   const sql = 'SELECT * FROM Users';
   db.query(sql, function(err, results) {
@@ -16,7 +17,7 @@ usersRouter.get('/', (req, res, next) => {
 });
 
 //user_arr = [name, father_lname, mother_lname, birthdate, birth_city, birth_state]
-
+// POST /api/users
 usersRouter.post('/', (req, res, next) => {
   const id = uuidv1();
   let sql = `INSERT INTO Users (id, email, password) VALUES ("${id}", "${req.body.email}", "${req.body.password}")`;
@@ -54,8 +55,26 @@ usersRouter.param('userId', (req, res, next, userId) => {
   });
 });
 
+// GET /api/users/:userId
 usersRouter.get('/:userId', (req, res, next) => {
   res.status(200).send({user: req.user});
 });
+
+// PUT /api/users/:userId
+usersRouter.put('/:userId', (req, res, next) => {
+  let sql = `UPDATE Users SET ? WHERE id="${req.userId}"`;
+  db.query(sql, req.body, function(err, result) {
+    if (err) {
+      next(err);
+    } else {
+      res.status(200).send('ok');
+    }
+  });
+});
+
+const userinfoRouter = require('./userinfo');
+usersRouter.use('/info', userinfoRouter);
+
+// DELETE /api/users/:userId
 
 module.exports = usersRouter;
