@@ -8,7 +8,7 @@ newsletterRouter.get('/suscriber', (req, res, next) => {
     if (err) {
       next(err);
     } else {
-      res.status(200).send(results);
+      res.status(200).send({suscribers: results});
     }
   });
 });
@@ -26,7 +26,7 @@ newsletterRouter.post('/suscriber', (req, res, next) => {
           next(err);
         } else {
           console.log(insertedSuscriber);
-          res.status(201).send({suscriber: insertedSuscriber});
+          res.status(201).send({suscriber: insertedSuscriber[0]});
         }
       });
     }
