@@ -2,7 +2,7 @@ const express = require('express');
 const newsletterRouter = express.Router();
 const db = require('../../db/database');
 
-newsletterRouter.get('/suscriber', (req, res, next) => {
+newsletterRouter.get('/suscribers', (req, res, next) => {
   const sql = 'SELECT * FROM Suscribers';
   db.query(sql, function(err, results) {
     if (err) {
@@ -13,7 +13,7 @@ newsletterRouter.get('/suscriber', (req, res, next) => {
   });
 });
 
-newsletterRouter.post('/suscriber', (req, res, next) => {
+newsletterRouter.post('/suscribers', (req, res, next) => {
   let sql = `INSERT INTO Suscribers (email) VALUES ('${req.body.email}')`;
   db.query(sql, function(err, result) {
     if (err) {

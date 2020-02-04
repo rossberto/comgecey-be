@@ -23,7 +23,11 @@ usersRouter.post('/', (req, res, next) => {
   let sql = `INSERT INTO Users (id, email, password) VALUES ("${id}", "${req.body.email}", "${req.body.password}")`;
   db.query(sql, function(err, result) {
     if (err) {
-      next(err);
+      if (err.code === 'ER_DUP_ENTRY') {
+        res.status(209).send('ER_DUP_ENTRY');
+      } else {
+        next(err);
+      }
     } else {
       sql = `SELECT id, email FROM Users WHERE id="${id}"`;
       db.query(sql, function(err, insertedUser) {
