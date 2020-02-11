@@ -4,6 +4,8 @@ const usersRouter = express.Router();
 const db = require('../../db/database');
 const uuidv1 = require('uuid/v1'); // Timebase
 
+const sendConfirmation = require('../mailer');
+
 // GET /api/users
 usersRouter.get('/', (req, res, next) => {
   const sql = 'SELECT * FROM Users';
@@ -34,6 +36,7 @@ usersRouter.post('/', (req, res, next) => {
         if (err) {
           next(err);
         } else {
+          sendConfirmation(insertedUser[0].email);
           res.status(201).send({user: insertedUser[0]});
         }
       });
