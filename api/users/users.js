@@ -36,7 +36,7 @@ usersRouter.post('/', (req, res, next) => {
         if (err) {
           next(err);
         } else {
-          sendConfirmation(insertedUser[0].email);
+          sendConfirmation(id);
           res.status(201).send({user: insertedUser[0]});
         }
       });
