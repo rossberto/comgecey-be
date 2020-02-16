@@ -86,6 +86,9 @@ usersRouter.use('/:userId/address', addressRouter);
 const mailRouter = require('./mail');
 usersRouter.use('/:userId/mail', mailRouter);
 
+const professionalRouter = require('./professional');
+usersRouter.use('/:userId/professional', professionalRouter);
+
 // DELETE /api/users/:userId
 
 module.exports = usersRouter;

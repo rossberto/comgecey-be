@@ -11,7 +11,6 @@ mailRouter.get('/', (req, res, next) => {
       next();
     } else {
       if (mail.length > 0) {
-        console.log(mail);
         res.status(200).send({mail: mail[0]});
       } else {
         res.status(404).send();
