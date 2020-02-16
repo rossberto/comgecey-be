@@ -69,6 +69,7 @@ usersRouter.get('/:userId', (req, res, next) => {
 
 // PUT /api/users/:userId
 usersRouter.put('/:userId', (req, res, next) => {
+  console.log(req.body);
   let sql = `UPDATE Users SET ? WHERE id="${req.userId}"`;
   db.query(sql, req.body, function(err, result) {
     if (err) {
@@ -79,8 +80,8 @@ usersRouter.put('/:userId', (req, res, next) => {
   });
 });
 
-const userinfoRouter = require('./userinfo');
-usersRouter.use('/info', userinfoRouter);
+const addressRouter = require('./address');
+usersRouter.use('/:userId/address', addressRouter);
 
 // DELETE /api/users/:userId
 
