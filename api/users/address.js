@@ -10,7 +10,6 @@ addressRouter.get('/', (req, res, next) => {
     if (err) {
       next();
     } else {
-      console.log(address);
       res.status(200).send({address: address[0]});
     }
   });
@@ -31,8 +30,6 @@ addressRouter.post('/', (req, res, next) => {
 });
 
 addressRouter.put('/', (req, res, next) => {
-  console.log('en put');
-  console.log(req.body);
   const sql = `UPDATE Addresses SET ? WHERE Users_id="${req.userId}"`;
   db.query(sql, req.body, function(err) {
     if (err) {

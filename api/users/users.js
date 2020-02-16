@@ -83,6 +83,9 @@ usersRouter.put('/:userId', (req, res, next) => {
 const addressRouter = require('./address');
 usersRouter.use('/:userId/address', addressRouter);
 
+const mailRouter = require('./mail');
+usersRouter.use('/:userId/mail', mailRouter);
+
 // DELETE /api/users/:userId
 
 module.exports = usersRouter;
