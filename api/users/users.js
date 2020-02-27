@@ -38,6 +38,11 @@ usersRouter.post('/', (req, res, next) => {
         } else {
           console.log(insertedUser);
           sendConfirmation(insertedUser[0].email, id);
+
+          const dm = require('../docs_manager');
+          const response = dm.createUserDir(id);
+          console.log(response);
+
           res.status(201).send({user: insertedUser[0]});
         }
       });
