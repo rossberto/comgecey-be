@@ -20,10 +20,8 @@ professionalRouter.get('/', (req, res, next) => {
 });
 
 professionalRouter.post('/', (req, res, next) => {
-  console.log(req.body);
   const professional = req.body;
   professional['Users_id'] = req.userId;
-  console.log(professional);
 
   let sql = 'INSERT INTO Professional SET ?';
   db.query(sql, professional, function(err, result) {

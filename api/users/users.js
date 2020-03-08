@@ -36,12 +36,10 @@ usersRouter.post('/', (req, res, next) => {
         if (err) {
           next(err);
         } else {
-          console.log(insertedUser);
           sendConfirmation(insertedUser[0].email, id);
 
           const dm = require('../docs_manager');
           const response = dm.createUserDir(id);
-          console.log(response);
 
           res.status(201).send({user: insertedUser[0]});
         }
@@ -75,7 +73,6 @@ usersRouter.get('/:userId', (req, res, next) => {
 
 // PUT /api/users/:userId
 usersRouter.put('/:userId', (req, res, next) => {
-  console.log(req.body);
   let sql = `UPDATE Users SET ? WHERE id="${req.userId}"`;
   db.query(sql, req.body, function(err, result) {
     if (err) {

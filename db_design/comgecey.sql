@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Addresses` (
   `zip_code` VARCHAR(255) NULL,
   `phone` VARCHAR(255) NULL,
   `Users_id` VARCHAR(255) NOT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`id`, `Users_id`),
   INDEX `fk_Addresses_Users1_idx` (`Users_id` ASC),
   CONSTRAINT `fk_Addresses_Users1`
     FOREIGN KEY (`Users_id`)
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`MailAddresses` (
   `zip_code` VARCHAR(255) NULL,
   `phone` VARCHAR(255) NULL,
   `Users_id` VARCHAR(255) NOT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`id`, `Users_id`),
   INDEX `fk_MailAddresses_Users1_idx` (`Users_id` ASC),
   CONSTRAINT `fk_MailAddresses_Users1`
     FOREIGN KEY (`Users_id`)
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Professional` (
   `book` VARCHAR(255) NULL,
   `ssa` VARCHAR(255) NULL,
   `Users_id` VARCHAR(255) NOT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`id`, `Users_id`),
   INDEX `fk_Professional_Users1_idx` (`Users_id` ASC),
   CONSTRAINT `fk_Professional_Users1`
     FOREIGN KEY (`Users_id`)
