@@ -52,7 +52,7 @@ function generateForm(userData) {
 
   // Pipe its output somewhere, like to a file or HTTP response
   // See below for browser usage
-  doc.pipe(fs.createWriteStream('form-' + userData.id + '.pdf'));
+  doc.pipe(fs.createWriteStream('documentos/solicitudes/solicitud-' + userData.id + '.pdf'));
 
   /***********************************/
   /************** HEADER *************/

@@ -37,10 +37,10 @@ usersRouter.post('/', (req, res, next) => {
           next(err);
         } else {
           sendConfirmation(insertedUser[0].email, id);
-
+          /*
           const dm = require('../docs_manager');
           const response = dm.createUserDir(id);
-
+          */
           res.status(201).send({user: insertedUser[0]});
         }
       });
@@ -94,6 +94,9 @@ usersRouter.use('/:userId/professional', professionalRouter);
 
 const formRouter = require('../inscriptionPdf/generateInscriptionPdf');
 usersRouter.use('/:userId/form', formRouter);
+
+const documentsRouter = require('./documents');
+usersRouter.use('/:userId/documents', documentsRouter);
 
 // DELETE /api/users/:userId
 
