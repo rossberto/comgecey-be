@@ -92,6 +92,9 @@ usersRouter.use('/:userId/mail', mailRouter);
 const professionalRouter = require('./professional');
 usersRouter.use('/:userId/professional', professionalRouter);
 
+const formRouter = require('../inscriptionPdf/generateInscriptionPdf');
+usersRouter.use('/:userId/form', formRouter);
+
 // DELETE /api/users/:userId
 
 module.exports = usersRouter;
