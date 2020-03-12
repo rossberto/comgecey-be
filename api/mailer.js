@@ -23,8 +23,8 @@ function sendConfirmation(mail, userId) {
 
   console.log(mail, userId);
 
-  //const html = '<a href="http://registro.comgecey.org/user/' + userId + '">Confirmar</a>';
-  const html = '<a href="http://localhost:3000/user/' + userId + '">Confirmar</a>';
+  const html = '<a href="http://registro.comgecey.org/user/' + userId + '">Confirmar</a>';
+  //const html = '<a href="http://localhost:3000/user/' + userId + '">Confirmar</a>';
   const message = {
     from: 'no-responder@comgecey.org',
     to: mail,
