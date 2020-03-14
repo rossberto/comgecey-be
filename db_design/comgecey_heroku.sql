@@ -5,19 +5,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema heroku_6fad91cdc3d711d
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema heroku_6fad91cdc3d711d
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `heroku_6fad91cdc3d711d` DEFAULT CHARACTER SET utf8 ;
+USE `heroku_6fad91cdc3d711d` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Users`
+-- Table `heroku_6fad91cdc3d711d`.`Users`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Users` (
+CREATE TABLE IF NOT EXISTS `heroku_6fad91cdc3d711d`.`Users` (
   `id` VARCHAR(255) NOT NULL,
   `name` VARCHAR(255) NULL,
   `father_lname` VARCHAR(255) NULL,
@@ -34,9 +34,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Addresses`
+-- Table `heroku_6fad91cdc3d711d`.`Addresses`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Addresses` (
+CREATE TABLE IF NOT EXISTS `heroku_6fad91cdc3d711d`.`Addresses` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `street` VARCHAR(255) NULL,
   `number` VARCHAR(255) NULL,
@@ -50,16 +50,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Addresses` (
   INDEX `fk_Addresses_Users1_idx` (`Users_id` ASC),
   CONSTRAINT `fk_Addresses_Users1`
     FOREIGN KEY (`Users_id`)
-    REFERENCES `mydb`.`Users` (`id`)
+    REFERENCES `heroku_6fad91cdc3d711d`.`Users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`MailAddresses`
+-- Table `heroku_6fad91cdc3d711d`.`MailAddresses`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`MailAddresses` (
+CREATE TABLE IF NOT EXISTS `heroku_6fad91cdc3d711d`.`MailAddresses` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `street` VARCHAR(255) NULL,
   `number` VARCHAR(255) NULL,
@@ -73,16 +73,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`MailAddresses` (
   INDEX `fk_MailAddresses_Users1_idx` (`Users_id` ASC),
   CONSTRAINT `fk_MailAddresses_Users1`
     FOREIGN KEY (`Users_id`)
-    REFERENCES `mydb`.`Users` (`id`)
+    REFERENCES `heroku_6fad91cdc3d711d`.`Users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Professional`
+-- Table `heroku_6fad91cdc3d711d`.`Professional`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Professional` (
+CREATE TABLE IF NOT EXISTS `heroku_6fad91cdc3d711d`.`Professional` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `school` VARCHAR(255) NULL,
   `start_date` DATE NULL,
@@ -105,16 +105,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Professional` (
   INDEX `fk_Professional_Users1_idx` (`Users_id` ASC),
   CONSTRAINT `fk_Professional_Users1`
     FOREIGN KEY (`Users_id`)
-    REFERENCES `mydb`.`Users` (`id`)
+    REFERENCES `heroku_6fad91cdc3d711d`.`Users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Convocatories`
+-- Table `heroku_6fad91cdc3d711d`.`Convocatories`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Convocatories` (
+CREATE TABLE IF NOT EXISTS `heroku_6fad91cdc3d711d`.`Convocatories` (
   `id` VARCHAR(255) NOT NULL,
   `date` DATE NULL,
   `title` VARCHAR(255) NULL,
@@ -127,9 +127,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Places`
+-- Table `heroku_6fad91cdc3d711d`.`Places`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Places` (
+CREATE TABLE IF NOT EXISTS `heroku_6fad91cdc3d711d`.`Places` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   `street` VARCHAR(255) NULL,
@@ -141,9 +141,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Newsletters`
+-- Table `heroku_6fad91cdc3d711d`.`Newsletters`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Newsletters` (
+CREATE TABLE IF NOT EXISTS `heroku_6fad91cdc3d711d`.`Newsletters` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(255) NULL,
   `main_image_url` VARCHAR(255) NULL,
@@ -158,9 +158,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Suscribers`
+-- Table `heroku_6fad91cdc3d711d`.`Suscribers`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Suscribers` (
+CREATE TABLE IF NOT EXISTS `heroku_6fad91cdc3d711d`.`Suscribers` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(255) NULL,
   PRIMARY KEY (`id`),
@@ -169,9 +169,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Users_has_Convocatories`
+-- Table `heroku_6fad91cdc3d711d`.`Users_has_Convocatories`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Users_has_Convocatories` (
+CREATE TABLE IF NOT EXISTS `heroku_6fad91cdc3d711d`.`Users_has_Convocatories` (
   `Users_id` VARCHAR(255) NOT NULL,
   `Convocatories_id` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`Users_id`, `Convocatories_id`),
@@ -179,21 +179,21 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Users_has_Convocatories` (
   INDEX `fk_Users_has_Convocatories_Users1_idx` (`Users_id` ASC),
   CONSTRAINT `fk_Users_has_Convocatories_Users1`
     FOREIGN KEY (`Users_id`)
-    REFERENCES `mydb`.`Users` (`id`)
+    REFERENCES `heroku_6fad91cdc3d711d`.`Users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Users_has_Convocatories_Convocatories1`
     FOREIGN KEY (`Convocatories_id`)
-    REFERENCES `mydb`.`Convocatories` (`id`)
+    REFERENCES `heroku_6fad91cdc3d711d`.`Convocatories` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Convocatories_has_Places`
+-- Table `heroku_6fad91cdc3d711d`.`Convocatories_has_Places`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Convocatories_has_Places` (
+CREATE TABLE IF NOT EXISTS `heroku_6fad91cdc3d711d`.`Convocatories_has_Places` (
   `Convocatories_id` VARCHAR(255) NOT NULL,
   `Places_id` INT NOT NULL,
   PRIMARY KEY (`Convocatories_id`, `Places_id`),
@@ -201,12 +201,12 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Convocatories_has_Places` (
   INDEX `fk_Convocatories_has_Places_Convocatories1_idx` (`Convocatories_id` ASC),
   CONSTRAINT `fk_Convocatories_has_Places_Convocatories1`
     FOREIGN KEY (`Convocatories_id`)
-    REFERENCES `mydb`.`Convocatories` (`id`)
+    REFERENCES `heroku_6fad91cdc3d711d`.`Convocatories` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Convocatories_has_Places_Places1`
     FOREIGN KEY (`Places_id`)
-    REFERENCES `mydb`.`Places` (`id`)
+    REFERENCES `heroku_6fad91cdc3d711d`.`Places` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
