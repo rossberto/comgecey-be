@@ -121,8 +121,11 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Convocatories` (
   `description` VARCHAR(255) NULL,
   `email` VARCHAR(255) NULL,
   `phone` VARCHAR(255) NULL,
+  `bank` VARCHAR(255) NULL,
   `bank_account` VARCHAR(255) NULL,
-  PRIMARY KEY (`id`))
+  `status` VARCHAR(255) NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `title_UNIQUE` (`title` ASC))
 ENGINE = InnoDB;
 
 
@@ -136,7 +139,11 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Places` (
   `town` VARCHAR(255) NULL,
   `city` VARCHAR(255) NULL,
   `number` VARCHAR(255) NULL,
-  PRIMARY KEY (`id`))
+  `state` VARCHAR(255) NULL,
+  `zip_code` VARCHAR(255) NULL,
+  `phone` VARCHAR(255) NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC))
 ENGINE = InnoDB;
 
 
@@ -174,6 +181,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `mydb`.`Users_has_Convocatories` (
   `Users_id` VARCHAR(255) NOT NULL,
   `Convocatories_id` VARCHAR(255) NOT NULL,
+  `status` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`Users_id`, `Convocatories_id`),
   INDEX `fk_Users_has_Convocatories_Convocatories1_idx` (`Convocatories_id` ASC),
   INDEX `fk_Users_has_Convocatories_Users1_idx` (`Users_id` ASC),

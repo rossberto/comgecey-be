@@ -1,13 +1,9 @@
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
-console.log(process.env.DB_HOST);
-console.log(process.env.DB_USER);
-console.log(process.env.DB_PASSWORD);
-console.log(process.env.DB_SCHEMA);
-
 const mysql = require('mysql');
-/*
+
+console.log('Local Database...');
 const connection = mysql.createPool({
   multipleStatements: true,
   host    : 'localhost',
@@ -15,7 +11,12 @@ const connection = mysql.createPool({
   password: 'ironhack',
   database: 'mydb'
 });
-*/
+
+/*
+console.log(process.env.DB_HOST);
+console.log(process.env.DB_USER);
+console.log(process.env.DB_PASSWORD);
+console.log(process.env.DB_SCHEMA);
 
 const connection = mysql.createPool({
   multipleStatements: true,
@@ -24,7 +25,7 @@ const connection = mysql.createPool({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_SCHEMA
 });
-
+*/
 /*
 connection.getConnection(function(err, connection) {
   if (err) throw err;
