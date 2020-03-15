@@ -133,7 +133,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`Places`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Places` (
-  `id` INT NOT NULL AUTO_INCREMENT,
+  `id` VARCHAR(255) NOT NULL,
   `name` VARCHAR(255) NOT NULL,
   `street` VARCHAR(255) NULL,
   `town` VARCHAR(255) NULL,
@@ -203,7 +203,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Convocatories_has_Places` (
   `Convocatories_id` VARCHAR(255) NOT NULL,
-  `Places_id` INT NOT NULL,
+  `Places_id` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`Convocatories_id`, `Places_id`),
   INDEX `fk_Convocatories_has_Places_Places1_idx` (`Places_id` ASC),
   INDEX `fk_Convocatories_has_Places_Convocatories1_idx` (`Convocatories_id` ASC),
