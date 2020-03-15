@@ -98,6 +98,9 @@ usersRouter.use('/:userId/form', formRouter);
 const documentsRouter = require('./documents');
 usersRouter.use('/:userId/documents', documentsRouter);
 
+const filesRouter = require('./files');
+usersRouter.use('/:userId/files', filesRouter);
+
 // DELETE /api/users/:userId
 
 module.exports = usersRouter;
