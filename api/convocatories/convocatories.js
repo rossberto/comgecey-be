@@ -22,8 +22,8 @@ convocatoriesRouter.get('/', (req, res, next) => {
 convocatoriesRouter.post('/', (req, res, next) => {
   const id = uuidv1();
   req.body.id = id;
+  
   let sql = 'INSERT INTO Convocatories SET ?';
-  console.log(req.body);
   db.query(sql, req.body, function(err, result) {
     if (err) {
       if (err.code === 'ER_DUP_ENTRY') {
