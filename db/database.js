@@ -13,6 +13,15 @@ const connection = mysql.createPool({
 });
 
 /*
+console.log('Godaddy storage...');
+const storage = mysql.createPool({
+  host    : process.env.GD_STORAGE_HOST,
+  port    : process.env.GD_STORAGE_PORT,
+  user    : process.env.GD_STORAGE_USER,
+  password: process.env.GD_STORAGE_PASSWORD,
+});
+*/
+/*
 console.log(process.env.DB_HOST);
 console.log(process.env.DB_USER);
 console.log(process.env.DB_PASSWORD);

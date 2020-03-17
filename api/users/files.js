@@ -11,11 +11,13 @@ var storage = multer.diskStorage({
     console.log(file);
     console.log(req.path);
     type = file.mimetype.split('/');
-    cb(null, 'curp-' + req.userId + '.pdf'); //file.fieldname + '-' + Date.now() + '.' + type[1]);
+    cb(null, req.path + '-' + req.userId + '.pdf'); //file.fieldname + '-' + Date.now() + '.' + type[1]);
   }
 })
 
 const upload = multer({storage: storage});
+
+
 
 filesRouter.post('/curp', upload.single('file'), (req, res, next) => {
   const file = req.file
@@ -26,6 +28,10 @@ filesRouter.post('/curp', upload.single('file'), (req, res, next) => {
 
   }
   res.send(file)
+});
+
+filesRouter.use('/curp', express.static('documentos/curp'), (req, res) => {
+  res.status(404).send();
 });
 
 filesRouter.post('/rfc', upload.single('file'), (req, res, next) => {
@@ -39,6 +45,10 @@ filesRouter.post('/rfc', upload.single('file'), (req, res, next) => {
   res.send(file)
 });
 
+filesRouter.use('/rfc', express.static('documentos/rfc'), (req, res) => {
+  res.status(404).send();
+});
+
 filesRouter.post('/domicilio', upload.single('file'), (req, res, next) => {
   const file = req.file
   if (!file) {
@@ -48,6 +58,10 @@ filesRouter.post('/domicilio', upload.single('file'), (req, res, next) => {
 
   }
   res.send(file)
+});
+
+filesRouter.use('/domicilio', express.static('documentos/domicilio'), (req, res) => {
+  res.status(404).send();
 });
 
 filesRouter.post('/profesional', upload.single('file'), (req, res, next) => {
@@ -61,6 +75,10 @@ filesRouter.post('/profesional', upload.single('file'), (req, res, next) => {
   res.send(file)
 });
 
+filesRouter.use('/profesional', express.static('documentos/profesional'), (req, res) => {
+  res.status(404).send();
+});
+
 filesRouter.post('/pago', upload.single('file'), (req, res, next) => {
   const file = req.file
   if (!file) {
@@ -70,6 +88,10 @@ filesRouter.post('/pago', upload.single('file'), (req, res, next) => {
 
   }
   res.send(file)
+});
+
+filesRouter.use('/pago', express.static('documentos/pago'), (req, res) => {
+  res.status(404).send();
 });
 /*
 const curpRouter = require('./files/curp');
