@@ -11,7 +11,7 @@ var storage = multer.diskStorage({
     console.log(file);
     console.log(req.path);
     type = file.mimetype.split('/');
-    cb(null, req.path + '-' + req.userId + '.pdf'); //file.fieldname + '-' + Date.now() + '.' + type[1]);
+    cb(null, req.path + '-' + req.userId + '.pdf');
   }
 })
 

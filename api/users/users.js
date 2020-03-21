@@ -4,7 +4,7 @@ const usersRouter = express.Router();
 const db = require('../../db/database');
 const uuidv1 = require('uuid/v1'); // Timebase
 
-const sendConfirmation = require('../mailer');
+const { sendConfirmation } = require('../mailer');
 
 // GET /api/users
 usersRouter.get('/', (req, res, next) => {
@@ -100,6 +100,9 @@ usersRouter.use('/:userId/documents', documentsRouter);
 
 const filesRouter = require('./files');
 usersRouter.use('/:userId/files', filesRouter);
+
+const userConvocatoriesRouter = require('./convocatories');
+usersRouter.use('/:userId/convocatories', userConvocatoriesRouter);
 
 // DELETE /api/users/:userId
 

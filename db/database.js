@@ -3,6 +3,7 @@ require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
 const mysql = require('mysql');
 
+/*
 console.log('Local Database...');
 const connection = mysql.createPool({
   multipleStatements: true,
@@ -11,17 +12,9 @@ const connection = mysql.createPool({
   password: 'ironhack',
   database: 'mydb'
 });
-
-/*
-console.log('Godaddy storage...');
-const storage = mysql.createPool({
-  host    : process.env.GD_STORAGE_HOST,
-  port    : process.env.GD_STORAGE_PORT,
-  user    : process.env.GD_STORAGE_USER,
-  password: process.env.GD_STORAGE_PASSWORD,
-});
 */
-/*
+
+
 console.log(process.env.DB_HOST);
 console.log(process.env.DB_USER);
 console.log(process.env.DB_PASSWORD);
@@ -34,7 +27,7 @@ const connection = mysql.createPool({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_SCHEMA
 });
-*/
+
 /*
 connection.getConnection(function(err, connection) {
   if (err) throw err;
