@@ -22,7 +22,7 @@ convocatoriesRouter.get('/', (req, res, next) => {
 convocatoriesRouter.post('/', (req, res, next) => {
   const id = uuidv1();
   req.body.id = id;
-  
+
   let sql = 'INSERT INTO Convocatories SET ?';
   db.query(sql, req.body, function(err, result) {
     if (err) {
@@ -77,5 +77,8 @@ convocatoriesRouter.put('/:convocatoryId', (req, res, next) => {
     }
   });
 });
+
+const suscribersRouter = require('./suscribers');
+convocatoriesRouter.use('/:convocatoryId/suscribers', suscribersRouter);
 
 module.exports = convocatoriesRouter;
