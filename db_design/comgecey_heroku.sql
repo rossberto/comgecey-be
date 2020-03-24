@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS `heroku_6fad91cdc3d711d`.`Users` (
   `email` VARCHAR(255) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
   `confirmed` TINYINT NULL DEFAULT 0,
+  `is_admin` TINYINT NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC))
 ENGINE = InnoDB;
