@@ -8,13 +8,17 @@ const authRouter = require('./auth/auth');
 const convocatoriesRouter = require('./convocatories/convocatories');
 const placesRouter = require('./convocatories/places');
 const convHasPlaceRouter = require('./convocatories/conv_has_place');
-//apiRouter.use('/imgs', usersRouter);
 
-apiRouter.use('/newsletter', newsletterRouter);
-apiRouter.use('/users', usersRouter);
+const withAuth = require('./middleware');
+
+// Routes require auth
+apiRouter.use('/users', withAuth, usersRouter);
+apiRouter.use('/convocatories', withAuth, convocatoriesRouter);
+apiRouter.use('/places', withAuth, placesRouter);
+apiRouter.use('/conv_has_place', withAuth, convHasPlaceRouter);
+
+// Routes do not require auth
 apiRouter.use('/auth', authRouter);
-apiRouter.use('/convocatories', convocatoriesRouter);
-apiRouter.use('/places', placesRouter);
-apiRouter.use('/conv_has_place', convHasPlaceRouter);
+apiRouter.use('/newsletter', newsletterRouter);
 
 module.exports = apiRouter;
