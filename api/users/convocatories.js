@@ -7,7 +7,12 @@ const { sendConvConfirmation } = require('../mailer');
 
 // GET /api/users/:userId/convocatories
 userConvocatoriesRouter.get('/', (req, res, next) => {
-  const sql = `SELECT * FROM Users_has_Convocatories WHERE Users_id="${req.userId}"`;
+  const sql = 'SELECT Users_has_Convocatories.status AS user_status, title, Convocatories_id AS id, ' +
+                      'Convocatories.status AS convocatory_status ' +
+              'FROM Users_has_Convocatories ' +
+              'JOIN Convocatories ON Users_has_Convocatories.Convocatories_id=Convocatories.id ' +
+                                 "OR Convocatories.status='Abierta' " +
+              `WHERE Users_id='${req.userId}'`;
   db.query(sql, function(err, results) {
     if (err) {
       next(err);

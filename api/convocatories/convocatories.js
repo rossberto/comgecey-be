@@ -18,6 +18,18 @@ convocatoriesRouter.get('/', (req, res, next) => {
   });
 });
 
+// GET /api/convocatories/open
+convocatoriesRouter.get('/open', (req, res, next) => {
+  const sql = "SELECT * FROM Convocatories WHERE status='Abierta'";
+  db.query(sql, function(err, results) {
+    if (err) {
+      next(err);
+    } else {
+      res.status(200).send({convocatories: results});
+    }
+  });
+});
+
 // POST /api/convocatories
 convocatoriesRouter.post('/', (req, res, next) => {
   const id = uuidv1();
