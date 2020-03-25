@@ -1,8 +1,7 @@
 const jwt = require('jsonwebtoken');
-const secret = 'C0MG3C3YPL4TF0RM';
 
 const withAuth = function(req, res, next) {
-  const token = req.headers.authorization;
+  const [token, secret] = req.headers.authorization.split(':');
 
   if (!token) {
     res.status(401).send('Unauthorized: No token provided');
