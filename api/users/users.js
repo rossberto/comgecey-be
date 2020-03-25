@@ -83,6 +83,17 @@ usersRouter.put('/:userId', (req, res, next) => {
   });
 });
 
+usersRouter.delete('/:userId', (req, res, next) => {
+  const sql = `DELETE FROM Users WHERE id='${req.userId}'`;
+  db.query(sql, function(err, result) {
+    if (err) {
+      next(err);
+    } else {
+      res.status(204).send();
+    }
+  });
+});
+
 const addressRouter = require('./address');
 usersRouter.use('/:userId/address', addressRouter);
 
