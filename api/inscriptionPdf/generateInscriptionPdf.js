@@ -28,7 +28,7 @@ formRouter.post('/', (req, res, next) => {
         next(err);
       }
     } else {
-      console.log(userData[0]);
+      //console.log(userData[0]);
       generateForm(userData[0]);
       res.status(201).send({userData: userData[0]});
     }

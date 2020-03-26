@@ -1,12 +1,12 @@
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
-
+/*
 console.log(process.env.DEV_EMAIL_HOST);
 console.log(process.env.DEV_EMAIL_PORT);
 console.log(process.env.DEV_EMAIL_USER);
 console.log(process.env.DEV_EMAIL_PASSWORD);
-
+*/
 
 const nodemailer = require('nodemailer');
 const fs = require('fs');
@@ -21,10 +21,11 @@ function sendConfirmation(mail, userId) {
     }
   });
 
-  console.log(mail, userId);
-
-  //const html = '<a href="http://registro.comgecey.org/user/' + userId + '">Confirmar</a>';
-  const html = '<a href="http://localhost:3000/user/' + userId + '">Confirmar</a>';
+  const html = '<div><h1>Bienvenido a la plataforma del Comgecey<h1>' +
+               `<h2>Para completar tu registro, haz clic en el siguiente enlace:<h2>` +
+               '<a href="https://www.comgecey.org/user/' + userId + '">Confirmar</a>' +
+               '</div>';
+  //const html = '<a href="http://localhost:3000/user/' + userId + '">Confirmar</a>';
   const message = {
     from: 'no-responder@comgecey.org',
     to: mail,
