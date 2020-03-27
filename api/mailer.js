@@ -53,8 +53,6 @@ function sendConvConfirmation(mail, conv_name) {
     }
   });
 
-  console.log(mail, conv_name);
-
   const html = '<div><h1>Inscripción en proceso<h1>' +
                `<h2>Convocatoria ${conv_name}<h2>` +
                '<p>Una vez que verifiquemos ' +

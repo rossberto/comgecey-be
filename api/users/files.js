@@ -1,5 +1,6 @@
 const express = require('express');
 const multer = require('multer');
+const helmet = require('helmet');
 
 const filesRouter = express.Router();
 
@@ -29,6 +30,8 @@ filesRouter.post('/curp', upload.single('file'), (req, res, next) => {
   }
   res.send(file)
 });
+
+filesRouter.use(helmet.frameguard());
 
 filesRouter.use('/curp', express.static('documentos/curp'), (req, res) => {
   res.status(404).send();

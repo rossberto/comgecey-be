@@ -16,6 +16,8 @@ const withAuth = function(req, res, next) {
         }
       });
     }
+  } else if ( req.originalUrl.includes('documents') || req.originalUrl.includes('files') ) {
+    next();
   } else {
     res.status(401).send('No autorizado: Faltan credenciales');
   }
