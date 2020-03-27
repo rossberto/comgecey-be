@@ -44,6 +44,18 @@ suscribersRouter.param('userId', (req, res, next, userId) => {
   });
 });
 
+// PUT /api/convocatories/:convocatoryId/suscribers/:userId
+suscribersRouter.put('/:userId', (req, res, next) => {
+  const sql = `UPDATE Users_has_Convocatories SET status='${req.body.status}' WHERE Users_id='${req.userId}' AND Convocatories_id='${req.convocatoryId}'`;
+  db.query(sql, function(err, result) {
+    if (err) {
+      next();
+    } else {
+      res.status(200).send();
+    }
+  });
+});
+
 // DELETE /api/convocatories/:convocatoryId/suscribers/:userId
 suscribersRouter.delete('/:userId', (req, res, next) => {
   const sql = `DELETE FROM Users_has_Convocatories WHERE Users_id='${req.userId}' AND Convocatories_id='${req.convocatoryId}'`;
