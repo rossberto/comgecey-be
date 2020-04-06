@@ -1,6 +1,7 @@
 const express = require('express');
 const suscribersRouter = express.Router();
 
+const { sendWelcomeSuscriber } = require('../mailer');
 const db = require('../../db/database');
 
 // GET /api/convocatories/:convocatoryId/suscribers
@@ -46,12 +47,20 @@ suscribersRouter.param('userId', (req, res, next, userId) => {
 
 // PUT /api/convocatories/:convocatoryId/suscribers/:userId
 suscribersRouter.put('/:userId', (req, res, next) => {
-  const sql = `UPDATE Users_has_Convocatories SET status='${req.body.status}' WHERE Users_id='${req.userId}' AND Convocatories_id='${req.convocatoryId}'`;
+  let sql = `UPDATE Users_has_Convocatories SET status='${req.body.status}' WHERE Users_id='${req.userId}' AND Convocatories_id='${req.convocatoryId}'`;
   db.query(sql, function(err, result) {
     if (err) {
       next();
     } else {
-      res.status(200).send();
+      sql = `SELECT email FROM Users WHERE id='${req.userId}'`;
+      db.query(sql, function(err, users) {
+        if (err) {
+          next(err);
+        } else {
+          sendWelcomeSuscriber(users[0].email);
+          res.status(200).send();
+        }
+      });
     }
   });
 });

@@ -3,15 +3,18 @@ const userConvocatoriesRouter = express.Router();
 
 const db = require('../../db/database');
 
-const { sendConvConfirmation } = require('../mailer');
+const { sendConvConfirmation, sendNewSuscriberToAdmin } = require('../mailer');
 
 // GET /api/users/:userId/convocatories
 userConvocatoriesRouter.get('/', (req, res, next) => {
-  const sql = 'SELECT Users_has_Convocatories.status AS user_status, title, Convocatories_id AS id, ' +
-                      'Convocatories.status AS convocatory_status ' +
+  const sql = 'SELECT ' +
+                'Users_has_Convocatories.status AS user_status, ' +
+                'title, Convocatories_id AS id, ' +
+                'Convocatories.status AS convocatory_status ' +
               'FROM Users_has_Convocatories ' +
-              'JOIN Convocatories ON Users_has_Convocatories.Convocatories_id=Convocatories.id ' +
-                                 "OR Convocatories.status='Abierta' " +
+              'JOIN Convocatories ' +
+                'ON Users_has_Convocatories.Convocatories_id=Convocatories.id ' +
+                //"OR Convocatories.status='Abierta' " +
               `WHERE Users_id='${req.userId}'`;
   db.query(sql, function(err, results) {
     if (err) {
@@ -33,12 +36,13 @@ userConvocatoriesRouter.post('/', (req, res, next) => {
         next(err);
       }
     } else {
-      sql = `SELECT title FROM Convocatories WHERE id="${req.body.convocatoryId}"`;
+      sql = `SELECT email, title FROM Convocatories WHERE id="${req.body.convocatoryId}"`;
       db.query(sql, function(err, insertedUserConv) {
         if (err) {
           next(err);
         } else {
           sendConvConfirmation(req.user.email, insertedUserConv[0].title);
+          sendNewSuscriberToAdmin(insertedUserConv[0].email, insertedUserConv[0].title);
           res.status(201).send({userConvocatories: insertedUserConv[0]});
         }
       });

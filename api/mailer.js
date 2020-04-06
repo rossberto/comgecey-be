@@ -21,17 +21,15 @@ function sendConfirmation(mail, userId) {
     }
   });
 
-  const html = '<div><h1>Bienvenido a la plataforma del Comgecey<h1>' +
-               `<h2>Para completar tu registro, haz clic en el siguiente enlace:<h2>` +
+  const html = fs.readFileSync(__dirname + '/html-mails/confirm-mail-1.html').toString() +
                '<a href="https://www.comgecey.org/user/' + userId + '">Confirmar</a>' +
-               '</div>';
-  //const html = '<a href="http://localhost:3000/user/' + userId + '">Confirmar</a>';
+               fs.readFileSync(__dirname + '/html-mails/confirm-mail-2.html').toString();
   const message = {
     from: 'no-responder@comgecey.org',
     to: mail,
-    subject: 'Confirma tu correo',
+    subject: 'Confirmar correo',
     text: 'Confirmar correo',
-    html: html //fs.readFileSync(__dirname + '/' + userType + '-invitation.html').toString()
+    html: html
   }
 
   transport.sendMail(message, function(err, info) {
@@ -53,17 +51,12 @@ function sendConvConfirmation(mail, conv_name) {
     }
   });
 
-  const html = '<div><h1>Inscripción en proceso<h1>' +
-               `<h2>Convocatoria ${conv_name}<h2>` +
-               '<p>Una vez que verifiquemos ' +
-               'tu documentación recibirás un correo confirmando tu inscripción</p>' +
-               '</div>';
   const message = {
     from: 'no-responder@comgecey.org',
     to: mail,
-    subject: 'Inscripción en proceso',
+    subject: `Inscripción en proceso - Convocatoria ${conv_name}`,
     text: '',
-    html: html //fs.readFileSync(__dirname + '/' + userType + '-invitation.html').toString()
+    html: fs.readFileSync(__dirname + '/html-mails/suscInProcess.html').toString(),
   }
 
   transport.sendMail(message, function(err, info) {
@@ -75,13 +68,75 @@ function sendConvConfirmation(mail, conv_name) {
   });
 }
 
-function sendWelcomeSuscriber(email) {
+function sendNewSuscriberToAdmin(mail, conv_name) {
   let transport = nodemailer.createTransport({
+    host: process.env.DEV_EMAIL_HOST,
+    port: process.env.DEV_EMAIL_PORT,
+    auth: {
+      user: process.env.DEV_EMAIL_USER,
+      pass: process.env.DEV_EMAIL_PASSWORD
+    }
+  });
 
+  const html = '<div><h1>Nuevo Postulante<h1>' +
+               `<h2>Convocatoria ${conv_name}<h2>` +
+               '<p>Ingresa a la plataforma Comgecey para revisar la información ' +
+               'del nuevo postulante para la certificación.</p>' +
+               '<a href="https://app.comgecey.org/signin">Ir a la plataforma</a>' +
+               '</div>';
+  const message = {
+    from: 'no-responder@comgecey.org',
+    to: mail,
+    subject: 'Nuevo Postulante',
+    text: '',
+    html: html
+  }
+
+  transport.sendMail(message, function(err, info) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(info);
+    }
+  });
+}
+
+function sendWelcomeSuscriber(mail, conv_name) {
+  let transport = nodemailer.createTransport({
+    host: process.env.DEV_EMAIL_HOST,
+    port: process.env.DEV_EMAIL_PORT,
+    auth: {
+      user: process.env.DEV_EMAIL_USER,
+      pass: process.env.DEV_EMAIL_PASSWORD
+    }
+  });
+
+  const message = {
+    from: 'no-responder@comgecey.org',
+    to: mail,
+    subject: `Aviso de aceptación - Convocatoria ${conv_name}`,
+    text: '',
+    html: fs.readFileSync(__dirname + '/html-mails/docsConfirmed.html').toString(),
+    attachments: [
+      {
+        filename: 'programa-de-estudio.pdf',
+        path: './api/mailAttachments/programa-de-estudio.pdf'
+      }
+    ]
+  }
+
+  transport.sendMail(message, function(err, info) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(info);
+    }
   });
 }
 
 module.exports = {
   sendConfirmation,
-  sendConvConfirmation
+  sendConvConfirmation,
+  sendNewSuscriberToAdmin,
+  sendWelcomeSuscriber
 };

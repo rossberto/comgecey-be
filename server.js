@@ -19,7 +19,7 @@ app.use(errorhandler());
 app.use(morgan('dev'));
 
 //const upload = multer({dest: 'images/'});
-
+/*
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'uploads')
@@ -48,7 +48,7 @@ app.post('/uploadfile', upload.single('file'), (req, res, next) => {
 })
 
 app.use('/imgs', express.static('images'));
-
+*/
 app.use('/api', apiRouter);
 
 app.listen(PORT, console.log('Comgecey server listening at port: ' + PORT));
