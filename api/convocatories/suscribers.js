@@ -10,12 +10,10 @@ suscribersRouter.get('/', (req, res, next) => {
   const sql = 'SELECT Users.id, Users.name, Users.father_lname, Users.mother_lname, Users_has_Convocatories.status ' +
               'FROM Users_has_Convocatories JOIN Users ON Users_has_Convocatories.Users_id = Users.id ' +
 	            `WHERE Convocatories_id="${req.convocatoryId}"`;
-  console.log(sql);
   db.query(sql, function(err, convUsers) {
     if (err) {
       next(err);
     } else {
-      console.log(convUsers);
       const suscribers = convUsers.map(convUser => {
         return {
           id: convUser.id,
@@ -57,7 +55,7 @@ suscribersRouter.put('/:userId', (req, res, next) => {
         if (err) {
           next(err);
         } else {
-          sendWelcomeSuscriber(users[0].email);
+          sendWelcomeSuscriber(users[0].email, req.convocatory.title);
           res.status(200).send();
         }
       });

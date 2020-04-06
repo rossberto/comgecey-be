@@ -25,7 +25,7 @@ function sendConfirmation(mail, userId) {
                '<a href="https://www.comgecey.org/user/' + userId + '">Confirmar</a>' +
                fs.readFileSync(__dirname + '/html-mails/confirm-mail-2.html').toString();
   const message = {
-    from: 'no-responder@comgecey.org',
+    from: 'Comgecey <no-responder@comgecey.org>',
     to: mail,
     subject: 'Confirmar correo',
     text: 'Confirmar correo',
@@ -52,7 +52,7 @@ function sendConvConfirmation(mail, conv_name) {
   });
 
   const message = {
-    from: 'no-responder@comgecey.org',
+    from: 'Comgecey <no-responder@comgecey.org>',
     to: mail,
     subject: `Inscripción en proceso - Convocatoria ${conv_name}`,
     text: '',
@@ -85,7 +85,7 @@ function sendNewSuscriberToAdmin(mail, conv_name) {
                '<a href="https://app.comgecey.org/signin">Ir a la plataforma</a>' +
                '</div>';
   const message = {
-    from: 'no-responder@comgecey.org',
+    from: 'Comgecey <no-responder@comgecey.org>',
     to: mail,
     subject: 'Nuevo Postulante',
     text: '',
@@ -112,7 +112,7 @@ function sendWelcomeSuscriber(mail, conv_name) {
   });
 
   const message = {
-    from: 'no-responder@comgecey.org',
+    from: 'Comgecey <no-responder@comgecey.org>',
     to: mail,
     subject: `Aviso de aceptación - Convocatoria ${conv_name}`,
     text: '',
