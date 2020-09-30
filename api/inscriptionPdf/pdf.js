@@ -5,7 +5,9 @@ const fs = require('fs');
 function inputFormat(fontSize, string) {
   const values = string.split('  ');
 
-  const maxLength = values.reduce(function (a, b) { return a.length > b.length ? a : b; }).length;
+  //const maxLength = values.reduce(function (a, b) { return a.length > b.length ? a : b; }).length;
+  const totalLength = values.reduce((a,b) =>  a + b).length;
+  const totalFreeSpace = 95 * 12 / fontSize -totalLength;
 
   values.forEach((value, index) => {
     values[index] = ' '.repeat((maxLength - value.length)/2) + value + ' '.repeat((maxLength - value.length)/2);
