@@ -10,19 +10,14 @@ function inputFormat(fontSize, string) {
   const totalFreeSpace = 95 * 12 / fontSize -totalLength;
 
   values.forEach((value, index) => {
-    values[index] = ' '.repeat((maxLength - value.length)/2) + value + ' '.repeat((maxLength - value.length)/2);
+    values[index] = ' '.repeat(totalFreeSpace/(2 * values.length + 2)) + value + ' '.repeat(totalFreeSpace/(2 * values.length + 2));
   });
-
-  const len = maxLength * values.length;
-
-  const freeSpace = (95 * 12 / fontSize) - len;
-  const spacesBetween = freeSpace / (values.length - 1);
 
   let output = '';
   values.forEach((value, index) => {
     output += value;
     if (index < (values.length - 1)) {
-      output += ' '.repeat(spacesBetween);
+      output += ' ';
     }
   });
 
