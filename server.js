@@ -13,8 +13,21 @@ const PORT = process.env.PORT || 4000; // For localhost: 4000; / For Heroku serv
 
 const apiRouter = require('./api/api');
 
+var whitelist = ['https://app.comgecey.org', 'https://comgecey.org/registro']
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({
+  origin: corsOptions
+}));
 app.use(errorhandler());
 app.use(morgan('dev'));
 
