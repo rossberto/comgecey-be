@@ -20,6 +20,9 @@ apiRouter.use('/conv_has_place', withAuth, convHasPlaceRouter);
 const authRouter = require('./auth/auth');
 apiRouter.use('/auth', authRouter);
 
+const pwdRecoveryRouter = require('./auth/pwdRecovery');
+apiRouter.use('/pwdrecovery', pwdRecoveryRouter);
+
 const newsletterRouter = require('./newsletter/newsletter');
 apiRouter.use('/newsletter', newsletterRouter);
 

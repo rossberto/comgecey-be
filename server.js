@@ -12,7 +12,7 @@ const multer = require('multer');
 const PORT = process.env.PORT || 4000; // For localhost: 4000; / For Heroku server: 3306
 
 const apiRouter = require('./api/api');
-
+/*
 var whitelist = ['https://app.comgecey.org', 'https://comgecey.org/registro']
 var corsOptions = {
   origin: function (origin, callback) {
@@ -23,11 +23,14 @@ var corsOptions = {
     }
   }
 }
-
+*/
 app.use(bodyParser.json());
+/*
 app.use(cors({
   origin: corsOptions
 }));
+*/
+app.use(cors())
 app.use(errorhandler());
 app.use(morgan('dev'));
 
