@@ -41,6 +41,33 @@ function sendConfirmation(mail, userId) {
   });
 }
 
+function sendPaymentNotification(name) {
+  let transport = nodemailer.createTransport({
+    host: process.env.DEV_EMAIL_HOST,
+    port: process.env.DEV_EMAIL_PORT, 
+    auth: {
+      user: process.env.DEV_EMAIL_USER,
+      pass: process.env.DEV_EMAIL_PASSWORD
+    }
+  });
+
+  const text = 'El usuario ' + name + " acaba de subir/actualizar su comprobante de pago."
+  const message = {
+    from: 'Comgecey <no-responder@comgecey.org>',
+    to: 'contacto@comgecey.org',
+    subject: 'Comprobante de pago recibido',
+    text: text
+  }
+
+  transport.sendMail(message, function(err, info) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(info);
+    }
+  });
+}
+
 function sendConvConfirmation(mail, conv_name) {
   let transport = nodemailer.createTransport({
     host: process.env.DEV_EMAIL_HOST,
@@ -166,6 +193,7 @@ function sendPwd(mail, pwd) {
 
 module.exports = {
   sendConfirmation,
+  sendPaymentNotification,
   sendConvConfirmation,
   sendNewSuscriberToAdmin,
   sendWelcomeSuscriber,
